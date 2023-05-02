@@ -1,0 +1,24 @@
+{% extends 'post/layout.html' %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <div class="back-btn">
+        <a href="{% url 'post:post-detail' object.pk %}" class="btn btn-light"><i class="fa-solid fa-chevron-left"></i></a>
+    </div>
+    <div class="delete-post-wrapper mt-5">
+        <div class="delete-post-area">
+            <div class="delete-header">
+                <h5>Are you sure?</h5>
+                <hr>
+                <p>You are about to delete this post, this cannot be undone.</p>
+            </div>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

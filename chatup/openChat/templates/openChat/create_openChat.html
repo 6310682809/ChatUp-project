@@ -1,0 +1,35 @@
+{% extends 'openchat/layout.html' %}
+{% load static %}
+{% block body %}
+
+<!-- <form action="{% url 'openchat:create_openchat' %}" method="POST">
+    {% csrf_token %}
+    <label for="name">OpenChat name:</label>
+    <input type="text" id="name" name="name"><br>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description"><br>
+
+    <input type="submit" value="Submit">
+</form> -->
+
+<div class="create-openchat mt-5">
+  <div class="create-openchat wrapper">
+    <h2>Create OpenChat</h2>
+    <form action="{% url 'openchat:create_openchat' %}" method="POST">
+      {% csrf_token %}
+      <label for="name" class="m-0">OpenChat name:</label>
+      <input type="text" id="name" name="name" required><br>
+      <br>
+      <br>
+
+      <label for="description" class="m-0">Description:</label>
+      <input type="text" id="description" name="description"><br>
+      <br>
+
+      <input type="submit" value="Submit" class="submit-btn">
+    </form>
+  </div>
+</div>
+
+{% endblock %}

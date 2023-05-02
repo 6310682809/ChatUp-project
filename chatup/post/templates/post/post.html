@@ -1,0 +1,88 @@
+{% extends 'post/layout.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container">
+    <!-- ============ Feed ============ -->
+    <div class="feed">
+        <!-- create post -->
+        <form action="{% url 'post:post' %}" class="post-box mt-3" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-post">
+                <div class="input-post-box d-flex">
+                    <img src="{{userInfo.profile_image.url}}" alt="avatar" class="profile-pic">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="detail"></textarea>
+                    <label for="upload-img" class="upload-img">
+                        <i class="fa-regular fa-image"></i>
+                        <input type="file" id="upload-img" name="images" accept="image/*" style="display:none" multiple>
+                    </label>
+                    <div class="post-btn">
+                        <button type="submit" class="post-btn">Post</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% for post, image in all_post_and_image.items %}
+    <div class="post-feeds">
+        <div class="post-area">
+            <div class="post-header d-flex">
+                <a href="{% url 'searchFriend:friend' post.created_by.user_id.username %}" class="profile-pic">
+                    <img src="{{post.created_by.profile_image.url}}" alt="avatar" class="profile-pic">
+                </a>
+                <a href="{% url 'searchFriend:friend' post.created_by.user_id.username %}" class="header-info" style="color: #3f4682">
+                    <h5 class="username m-0">{{post.created_by}}</h5>
+                    <p class="create-date text-muted">{{post.created_at | timesince}} ago</p>
+                </a>
+                    {% if request.user == post.created_by.user_id %}
+                        <div class="d-flex align-items-center justify-content-center p-1 mx-2"
+                            style="width: 38px; height: 38px; object-fit: cover" id="delete-menu"
+                            data-bs-toggle="dropdown" aria-expanded="false" type="button" data-bs-auto-close="outside">
+                            <i class="fa-solid fa-ellipsis"></i>
+                        </div>
+                        <!-- delete dropdown -->
+                        <ul class="dropdown-menu shadow p-3 m-1" aria-labelledby="delete-menu">
+                            <div class="delete-dropdown">
+                                <a href="{% url 'post:delete_post' post.id %}" class="text-danger delete-btn">
+                                    Delete
+                                </a>
+                            </div>
+                        </ul>
+                    {% endif %}
+            </div>
+            <div class="post-main">
+                <div class="caption">
+                    {{post.detail}}
+                </div>
+
+                <!-- โชว์แค่รูปเดียว -->
+                {% if image %}
+                    <div class="post-img">
+                        <img src="{{image.file.url}}">
+                        <a href="{% url 'post:view_post' post.id %}">View All Photos</a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="post-action mt-4">
+                <a href="{% url 'post:like_post' post.id %}">
+                    <span id = heart>
+                        {% if post.like %}
+                            <i class="fa-solid fa-heart"></i>
+                        {% else %}
+                            <i class="fa-regular fa-heart"></i>
+                        {% endif %}
+                    </span>
+                 </a>
+                <a class="comment-btn float-right" href="{% url 'post:view_post' post.id %}" >Comment</a>
+                <p class="m-0">{{post.count_like}} Likes</p>
+                <p>{{post.count_comment}} Comments</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+<script src="../../static/post/css/post.js"></script>
+
+{% endblock %}

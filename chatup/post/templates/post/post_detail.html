@@ -1,0 +1,62 @@
+{% extends 'post/layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-3 col-sm-6">
+            <a href="{% url 'post:post_list' %}" class="btn btn-light">Back to Feed</a>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12 border-bottom">
+            <p>
+                <strong>{{ post.created_by }}</strong> {{ post.created_at }}
+                {% if request.user == post.created_by %}
+                <a href="{% url 'post:post-edit' post.pk %}" style="color: #333;"><i class="far fa-edit"></i></a>
+                <a href="{% url 'post:post-delete' post.pk %}" style="color: #333;"><i class="fas fa-trash"></i></a>
+                {% endif %}
+            </p>
+            <p>{{ post.body }}</p>
+
+            <div class="d-flex flex-row">
+                <form method="POST" action="{% url 'like' post.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button class="remove-default-btn" type="submit">
+                        <i class="far fa-thumbs-up"> <span>{{ post.likes.all.count }}</span></i>
+                    </button>
+                </form>
+
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12">
+            <h5>Add a Comment!</h5>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3 mb-5">
+        <div class="col-md-5 col-sm-12">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <div class="d-grid gap-2">
+                    <button class="btn btn-success mt-3">Submit!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% for comment in comments %}
+    <div class="row justify-content-center mt-3 mb-5 border-bottom">
+        <div class="col-md-5 col-sm-12">
+            <p>
+                <strong>{{ comment.created_by }}</strong> {{ comment.created_on }}
+                {% if request.user == comment.created_by %}
+                <a href="{% url 'post:comment-delete' post.pk comment.pk %}" style="color: #333;"><i class="fas fa-trash"></i></a>
+                {% endif %}
+            </p>
+            <p>{{ comment.comment }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}

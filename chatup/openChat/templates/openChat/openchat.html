@@ -1,0 +1,89 @@
+{% extends 'openchat/layout.html' %}
+{% block body %}
+
+<div class="openchat">
+    <div class="openchat-wrapper">
+      <!-- What chat room would you like to enter?<br>
+  <input id="room-name-input" type="text" size="100"><br>
+  <input id="room-name-submit" type="button" value="Enter">
+  
+  <script>
+      document.querySelector('#room-name-input').focus();
+      document.querySelector('#room-name-input').onkeyup = function(e) {
+          if (e.keyCode === 13) {  // enter, return
+              document.querySelector('#room-name-submit').click();
+          }
+      };
+  
+      document.querySelector('#room-name-submit').onclick = function(e) {
+          var roomName = document.querySelector('#room-name-input').value;
+          window.location.pathname = '/openchat/' + roomName + '/';
+      };
+  </script><br> -->
+  
+  <!--    <a href="{% url 'openchat:create_openchat' %}">Create OpenChat</a><br>-->
+  
+  <!--    {% if my_openchats %}-->
+  <!--    My openchat-->
+  <!--    <ul>-->
+  <!--      {% for openchat in my_openchats %}-->
+  <!--      <li><a href="{% url 'openchat:view_openchat' openchat.id  %}">{{ openchat }}</a></li>-->
+  <!--      {% endfor %}-->
+  <!--    </ul>-->
+  <!--    {% endif %}-->
+  
+  <!--    {% if all_openchats %}-->
+  <!--    All openchat-->
+  <!--    <ul>-->
+  <!--      {% for openchat in all_openchats %}-->
+  <!--      <li><a href="{% url 'openchat:join_openchat' openchat.id  %}">Join {{ openchat }}</a></li>-->
+  <!--      {% endfor %}-->
+  <!--    </ul>-->
+  <!--    {% endif %}-->
+  
+      <h5><a href="{% url 'openchat:create_openchat' %}" class="create-openchat-link">Create OpenChat</a></h5>
+      <hr>
+      <div class="my-openchat">
+        {% if my_openchats %}
+        <p>My OpenChat</p>
+        <div class="openchat-room">
+          {% for openchat in my_openchats %}
+          <a href="{% url 'openchat:view_openchat' openchat.id  %}" class="user-openchat d-flex">
+            <div class="img-wrapper">
+              <img src="{% static 'openchat/img/avatar.jpg' %}" class="avatar-pic" alt="avatar">
+            </div>
+            <div class="text-openchat-user">
+              <span class="openchat-username">{{ openchat }}</span>
+  <!--            <span class="group-members">(10)</span>-->
+  <!--            <br>-->
+  <!--            <span class="openchat-time text-muted">35 minutes ago</span>-->
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <hr>
+  
+      <div class="all-openchat">
+        {% if all_openchats %}
+        <p>All OpenChat</p>
+        <div class="openchat-room">
+          {% for openchat in all_openchats %}
+          <a href="{% url 'openchat:join_openchat' openchat.id  %}" class="user-openchat d-flex">
+            <div class="img-wrapper">
+              <img src="{% static 'openchat/img/avatar.jpg' %}" class="avatar-pic" alt="avatar">
+            </div>
+            <div class="text-openchat-user">
+              <span class="openchat-username">Join {{ openchat }}</span>
+              <!--<span class="group-members">(10)</span>-->
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+</div>
+
+{% endblock %}

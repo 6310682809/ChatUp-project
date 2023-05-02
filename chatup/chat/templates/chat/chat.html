@@ -1,0 +1,75 @@
+{% extends 'chat/layout.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container mt-2">
+    <div class="main">
+        
+        <!---------- Chat Room List ฝั่งที่เป็นรายชื่อห้องแชท (ซ้าย) ---------->
+        <div class="col-user mt-4">
+            <div class="header-user">
+                <a href="{% url 'user:index' %}"><i class="fa-solid fa-angle-left ps-7"></i></a>
+                <span>{{user.username}}</span>
+            </div>
+            <div class="content-user">
+                <span><b>Message</b></span>
+                {% for date, c in sort_last_chat_friend %}
+                    {% if c.sender == userInfo %}
+                        <a href="{% url 'chat:view_chat' c.reciever.user_id.id %}">
+                            <div class="user-chat d-flex">
+                                <div class="img-wrapper">
+                                    <img src="{{ c.reciever.profile_image.url }}" width="90px" class="avatar-pic" alt="avatar">
+                                </div>
+                                <div class="text-chat-user">
+                                    <span class="chat-username">{{c.reciever.user_id.username}}</span><br>
+                                    {% if c.message != ""%}
+                                        <span class="chat-time">คุณ: {{c.message|slice:":15"}}...</span>
+                                    {% else %}
+                                        <span class="chat-time">คุณส่งรูป</span>
+                                    {% endif %}
+
+                                    {% if c.reciever.online_status %}
+                                        <span style="color: green" id="{{c.reciever.user_id.username}}_status" class="online-status"> | Online</span>
+                                    {% else %}
+                                        <span style="color: grey" id="{{c.reciever.user_id.username}}_status" class="online-status"> | {{ c.reciever.last_logout|timesince }} ago</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                        <hr>
+                    {% else %}
+                        <a href="{% url 'chat:view_chat' c.sender.user_id.id %}">
+                            <div class="user-chat d-flex">
+                                <div class="img-wrapper">
+                                    <img src="{{ c.sender.profile_image.url }}" width="90px" class="avatar-pic" alt="avatar">
+                                </div>
+                                <div class="text-chat-user">
+                                    <span class="chat-username">{{c.sender.user_id.username}}</span><br>
+                                    {% if c.message != ""%}
+                                        <span class="chat-time">{{c.message|slice:":15"}}...</span>
+                                    {% else %}
+                                        <span class="chat-time">{{c.sender.user_id.username}} ส่งรูป</span>
+                                    {% endif %}
+                                    {% if c.sender.online_status %}
+                                        <span style="color: green" id="{{c.sender.user_id.username}}_status" class="online-status"> | Online</span>
+                                    {% else %}
+                                        <span style="color: grey" id="{{c.sender.user_id.username}}_status" class="online-status"> | {{c.sender.last_logout|timesince}} ago</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!---------- Chat Column ฝั่งที่เป็นห้องแชท (ขวา) ---------->
+        <div class="col-chat mt-4">
+            
+        </div>
+    </div>
+</div>
+{{request.user.username|json_script:"json-message-username"}}
+
+<script src="../../static/js/online_status.js"></script>
+{% endblock %}

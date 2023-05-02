@@ -1,0 +1,82 @@
+{% extends 'openchat/layout.html' %}
+{% block body %}
+
+{% load static %}
+
+<div class="openchat">
+    <div class="openchat-wrapper">
+      <h5><a href="{% url 'openchat:create_openchat' %}" class="create-openchat-link">Create OpenChat <i class="fa-solid fa-circle-plus" style="margin-left: 0.5rem; color: rgb(48, 236, 39);"></i></a></h5>
+      <div class="my-openchat">
+        {% if my_openchats %}
+        <p>My OpenChat</p>
+        <div class="openchat-room">
+            {% for openchat in my_openchats %}
+            <hr>
+            <a href="{% url 'openchat:view_openchat' openchat.id  %}" class="user-openchat d-flex">
+                <div class="img-wrapper">
+                    <img src="{{ openchat.group_image.url }}" class="group-pic" width="90px" alt="avatar">
+                </div>
+                <div class="text-openchat-user mt-2">
+                    <span class="openchat-username">{{ openchat }}</span>
+                    <span class="group-members">({{ openchat.members.count }})</span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      <hr>
+  
+      <div class="all-openchat">
+        {% if all_openchats %}
+        <p>All OpenChat</p>
+        <div class="openchat-room">
+            {% for openchat in all_openchats %}
+            <hr>
+            <a href="{% url 'openchat:join_openchat' openchat.id  %}" class="user-openchat d-flex">
+                <div class="img-wrapper">
+                    <img src="{{ openchat.group_image.url }}" class="avatar-pic" alt="avatar">
+                </div>
+                <div class="text-openchat-user mt-2">
+                    <span class="openchat-username">Join {{ openchat }}</span>
+                    <span class="group-members">({{ openchat.members.count }})  <i class="fa-solid fa-door-open" style="margin-left: 0.5rem; color: rgb(48, 236, 39);"></i></span>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Rooms</title>
+</head>
+<body>
+    <a href="{% url 'user:index' %}">Back</a><br>
+    <a href="{% url 'openchat:create_openchat' %}">Create OpenChat</a><br>
+
+    {% if my_openchats %}
+    My openchat
+    <ul>
+        {% for openchat in my_openchats %}
+            <li><a href="{% url 'openchat:view_openchat' openchat.id  %}">{{ openchat }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% if all_openchats %}
+    All openchat
+    <ul>
+        {% for openchat in all_openchats %}
+            <li><a href="{% url 'openchat:join_openchat' openchat.id  %}">Join {{ openchat }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html> -->

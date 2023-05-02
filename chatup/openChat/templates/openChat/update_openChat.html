@@ -1,0 +1,81 @@
+{% extends 'openchat/layout.html' %}
+
+{% block body %}
+
+{% load static %}
+<div class="update-openchat">
+  <div class="update-openchat wrapper">
+    <h2>OpenChat Detail</h2>
+    <form action="{% url 'openchat:update_openchat' openchat.id %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      {% if openchat.created_by == user_info %}
+      <div class="form-row text-center" style="display: flex; justify-content: center;">
+        <div class="form-group">
+            <img src="{{ openchat.group_image.url }}" class="profileimg" style="width: 180px; height: auto;">
+            <!-- <p>Update profile picture</p> -->
+            <!-- {{ form.as_p }} -->
+            <input class="form-control p-1" type="file" name="images" accept="image/png, image/jpeg, image/jpg">
+        </div>
+      </div>
+      {% endif %}
+
+      <label for="name" class="m-0">OpenChat name:</label>
+      {% if openchat.created_by == user_info %}
+      <input type="text" id="name" name="name" value="{{ openchat.name }}"><br>
+      {% else %}
+      <input type="text" id="name" name="name" value="{{ openchat.name }}" readonly><br>
+      {% endif %}
+      <br>
+
+      <label for="description" class="m-0">Description:</label>
+      {% if openchat.created_by == user_info %}
+      <input type="text" id="description" name="description" value="{{ openchat.description }}"><br>
+      {% else %}
+      <input type="text" id="description" name="description" value="{{ openchat.description }}" readonly><br>
+      {% endif %}
+      <br>
+
+      <label for="members" class="m-0">Members:</label>
+      {% for member in members %}
+      <div class="openchat-members d-flex">
+        <a href="{% url 'searchFriend:friend' username=member.user_id.username %}" class="user-openchat d-flex">
+          <div class="img-wrapper">
+            <img src="{{ member.profile_image.url }}" width="90px" class="avatar-pic" alt="avatar">
+          </div>
+          <div class="text-openchat-user mt-2">
+            <span class="openchat-username">
+              {{ member }}
+              {% if openchat.created_by == member %} 
+              (admin)
+              {% endif %}
+            </span>
+          </div>
+        </a>
+
+        <!------ add friend ----->
+        
+
+
+        {% if openchat.created_by == user_info %}
+        <a href="{% url 'openchat:remove_member' openchat_id=openchat.id member_id=member.id %}"
+          class="text-danger remove"><i class="fa-solid fa-circle-minus" style="color: red;"></i> Remove</a>
+        {% endif %}
+
+        {% if member == user_info or member in friends %}
+
+        {% else %}
+        <a href="{% url 'addFriend:addFriend' id=member.user_id.id %}?redirect={% url 'openchat:update_openchat' openchat_id %}" class="remove" id="addfriend">
+          <i class="fa-solid fa-circle-plus" style="margin-left: 0.5rem; color: rgb(48, 236, 39);"></i> Add Friend
+        </a>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      {% if openchat.created_by == user_info %}
+      <input type="submit" value="Submit" class="submit-btn mt-5">
+      {% endif %}
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'user/layout.html' %}
+{% block body %}
+
+<body>
+<br>
+<section>
+    <div class="text-center mt-4">
+    <p class="header">Notifications</p>
+      <div class="container w-50">
+        <div class="form-row text-center" style="display: flex; justify-content: center;">
+          <div class="form-group">  
+            <ul class="form-group profile-box box">
+              {% for notification in notifications %}
+                {% if notification.chat %}
+                  <a href="{% url 'chat:view_chat' notification.chat.sender.user_id.id %}">
+                    <li class="noti-box">
+                      <div class="row pl-3">
+                        <div class="col-2 pt-2">
+                          <img src={% url 'user:get_profile_picture' notification.create_by.id %} class="profileimg" style="width: 50px; height: 50px; background-color: black;" >
+                        </div>
+                        <div class="col-7 pt-1">
+                          <h3 style="color: #3F4682; font-weight: bold;" class="row pt-2">{{notification.create_by.username}}</h3>
+                          <p class="row noti-text">{{notification.get_detail}}</p>
+                        </div>
+                        <div class="col-2 ml-auto pt-3 icon-noti"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="col-4 ml-auto pt-2 time-post">{{notification.created_at | timesince}} ago</div>
+                      </div>
+                    </li>
+                  </a>
+                {% elif notification.openchat %}
+                  <a href="{% url 'openchat:view_openchat' notification.openchat.id %}">
+                    <li class="noti-box">
+                      <div class="row pl-3">
+                        <div class="col-2 pt-2">
+                          <img src={% url 'user:get_profile_picture' notification.create_by.id %} class="profileimg" style="width: 50px; height: 50px; background-color: black;" >
+                        </div>
+                        <div class="col-7 pt-1">
+                          <h3 style="color: #3F4682; font-weight: bold;" class="row pt-2">{{notification.create_by.username}}</h3>
+                          <p class="row noti-text">{{notification.get_detail}}</p>
+                        </div>
+                        <div class="col-2 ml-auto pt-3 icon-noti"><i class="fa-solid fa-comments"></i></div>
+                        <div class="col-4 ml-auto pt-2 time-post">{{notification.created_at | timesince}} ago</div>
+                      </div>
+                    </li>
+                  </a>
+                  {% elif notification.add_friend %}
+                  <a href="{% url 'searchFriend:friend' notification.add_friend.friend_id.user_id.username %}">
+                    <li class="noti-box">
+                      <div class="row pl-3">
+                        <div class="col-2 pt-2">
+                          <img src={% url 'user:get_profile_picture' notification.create_by.id %} class="profileimg" style="width: 50px; height: 50px; background-color: black;" >
+                        </div>
+                        <div class="col-7 pt-1">
+                          <h3 style="color: #3F4682; font-weight: bold;" class="row pt-2">{{notification.create_by.username}}</h3>
+                          <p class="row noti-text">{{notification.get_detail}}</p>
+                        </div>
+                        <div class="col-2 ml-auto pt-3 icon-noti"><i class="fa-solid fa-user-plus"></i></div>
+                        <div class="col-4 ml-auto pt-2 time-post">{{notification.created_at | timesince}} ago</div>
+                        
+                      </div>
+                    </li>
+                  </a>
+                {% elif notification.post %}
+                  <a href="{% url 'post:view_post' notification.post.id %}">
+                    <li class="noti-box">
+                      <div class="row pl-3">
+                        <div class="col-2 pt-2">
+                          <img src={% url 'user:get_profile_picture' notification.create_by.id %} class="profileimg" style="width: 50px; height: 50px; background-color: black;" >
+                        </div>
+                        <div class="col-7 pt-1">
+                          <h3 style="color: #3F4682; font-weight: bold;" class="row pt-2">{{notification.create_by.username}}</h3>
+                          <p class="row noti-text">{{notification.get_detail}}</p>
+                        </div>
+                        <div class="col-2 ml-auto pt-3 icon-noti">
+                          {% if notification.like %}
+                            <i class="fa-solid fa-heart"></i>
+                          {% elif notification.comment %}
+                            <i class="fa-solid fa-comment"></i>
+                          {% else %}
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                          {% endif %}
+                        </div>
+                        <div class="col-4 ml-auto pt-2 time-post">{{notification.created_at | timesince}} ago</div>
+                      </div>
+                    </li>
+                  </a>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+{% endblock %}

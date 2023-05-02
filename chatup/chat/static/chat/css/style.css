@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins';
+}
+body{
+    background-color: #f0f0f0;
+    font-family: sans-serif;
+}
+img{
+    width: 100%;
+}
+i{
+    color: #3f4682;
+}
+.navbar {
+    width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+nav img {
+    width: 30px;
+    height: 30px;
+    margin: auto;
+}
+
+nav p {
+    margin: 0px 0px 0px 7px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.navbar a {
+    float: left;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+    }
+}
+
+a{
+    color: #000000;
+}
+a:hover{
+    text-decoration: none;
+    color: #000000;
+}
+.container{
+    width: 100%;
+    margin: 0 auto;
+}
+.container img.avatar-pic{
+    border-radius: 50%;
+}
+.main{
+    width: 100%;
+    display: flex;
+}
+.col-user{
+    width: 40%;
+    height: 600px;
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+}
+.col-chat{
+    width: 60%;
+    height: 600px;
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+}
+.date{
+    text-align: center;
+    padding-top: 10px;
+}
+.date-time{
+    background-color: #dbdbdb;
+    border-radius: 20px;
+    padding: 2px 7px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.header-user{
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #dbdbdb;
+    font-weight: 600;
+}
+.header-user i{
+    float: left;
+    margin-left: 2rem;
+    margin-top: 4px;
+}
+.header-user a{
+    cursor: pointer;
+}
+.header-user span{
+    margin-left: -2rem;
+}
+.content-user{
+    padding: 24px;
+    height: 500px;
+    overflow: auto;
+}
+.user-chat{
+    margin-top: 1rem;
+}
+.user-chat:hover{
+    background-color: #dbdbdb;
+    padding: 0.2rem;
+    border-radius: 20px;
+}
+.chat-time{
+    color: #777;
+}
+
+/* read unread*/
+.user-chat.unread{
+    font-weight: 700;
+    color: #000000;
+}
+
+.img-wrapper{
+    width: 50px;
+    height: 50px;
+}
+.text-chat-user{
+    margin-left: 10px;
+}
+.header-chat{
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #dbdbdb;
+    font-weight: 600;
+}
+.chat-username{
+    font-weight: 500;
+}
+.chat-time{
+    font-size: 14px;
+}
+.img-wrapper-chat{
+    width: 40px;
+    height: 40px;
+}
+.content-header-chat{
+    margin-left: 24px;
+}
+.text-header-chat{
+    margin-left: 10px;
+}
+.content-chat{
+    padding: 20px;
+    height: 450px;
+    overflow: auto;
+}
+.chat{
+    display: flex;
+    margin-top: 1rem;
+}
+.in-chat-time{
+    font-size: 10px;
+    padding-left: .5rem;
+    margin-top: auto;
+}
+.user-name{
+    font-size: 12px;
+    font-weight: 500;
+    margin-left: .7rem;
+}
+.avatar-pic{
+    width: 100%;
+    height: 100%;
+}
+.chat-box{
+    max-width: 300px;
+    max-height: max-content;
+    margin-left: 10px;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 0.8rem;
+    border-radius: 30px;
+    background-color: #f4e4c8;
+    font-size: 12px;
+    font-weight: 600;
+}
+.chat-img{
+    margin-bottom: 1rem;
+}
+.chat-reply-wrapper{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 0.7rem;
+    margin-left: 0;
+    margin-right: 0;
+}
+.chat-reply{
+    float: right;
+    max-width: 300px;
+    background-color: #3f4682;
+    padding-top: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 30px;
+    font-size: 12px;
+    color: #ffffff;
+}
+.in-reply-time{
+    font-size: 10px;
+    margin-right: 0.6rem;
+    margin-top: auto;
+}
+.fa-ellipsis{
+    margin-right: 1rem;
+    padding-bottom: 0;
+}
+.reply-img{
+    margin-bottom: 1rem;
+}
+.input-chat{
+    display: flex;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.input-chat button{
+    border: none;
+    background-color: transparent;
+    margin: 0.7rem;
+}
+.input-chat-box{
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 20px;
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+.input-chat-box i{
+    margin-left: 10px;
+}
+.input{
+    width: 80%;
+    border: 0px solid transparent;
+    outline: none;
+    margin-left: 10px;
+}
+.delete-btn{
+    font-size: 12px;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+.delete-modal-btn{
+    color: #ffffff;
+    background-color: #eb5050;
+}
+.delete-btn:hover{
+    color: transparent;
+    background: transparent;
+    outline: none;
+}
+.online-status{
+    font-size: 12px;
+}

@@ -1,0 +1,228 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif,'Poppins';
+}
+
+body {
+    background: #f4e4c8;
+}
+
+i{
+    color: #3f4682;
+}
+
+.navbar {
+    width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+nav img {
+    width: 30px;
+    height: 30px;
+    margin: auto;
+}
+
+nav p {
+    margin: 0px 0px 0px 7px;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.navbar a {
+    float: left;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+@media screen and (max-width: 500px) {
+    .navbar a {
+        float: none;
+        display: block;
+    }
+}
+
+/*---------- post ---------*/
+img{
+    width: 100%;
+}
+.profile-pic{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.post-box{
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 1rem;
+}
+.post-box.username{
+    font-weight: 700;
+}
+.post-box .profile-pic{
+    margin-top: 2rem;
+}
+.post-box textarea{
+    margin: 1rem;
+}
+.post-box .fa-image{
+    color: #3f4682;
+    font-size: 20px;
+    margin-top: 3rem;
+}
+.post-box button{
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #3f4682;
+    border: none;
+    border-radius: 20px;
+    margin: 2.3rem 0rem 0rem 1rem;
+    padding: 0.5rem 1rem;
+}
+.feed{
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.post-img{
+    margin-left: auto;
+    margin-right: auto;
+}
+.post-img a{
+    color: #3f4682;
+}
+.post-img a:hover{
+    color: #3f4682;
+}
+.post-feeds{
+    width: 50%;
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+}
+.post-area{
+    padding: 1.5rem;
+}
+.header-info{
+    margin-left: 1rem;
+}
+.delete-btn{
+    background-color: #ffffff;
+    border: none;
+}
+.delete-dropdown a{
+    color: #eb5050;
+}
+.delete-dropdown a:hover{
+    color: #eb5050;
+}
+.edit-btn{
+    font-size: 18px;
+    padding: 0.2rem;
+    color: #3f4682;
+    background-color: #ffffff;
+    border: none;
+}
+.comment-btn{
+    color: #ffffff;
+    background-color: #3f4682;
+    padding: 0.5rem;
+    border-radius: 20px;
+}
+a:hover{
+    color: #ffffff;
+    text-decoration: none;
+}
+.fa-heart{
+    color: #3f4682;
+    cursor: pointer;
+    font-size: 30px;
+}
+.fa-heart.liked::before,
+.fa-heart.liked::after {
+    color: #eb5050;
+}
+.fa-heart.liked {
+    animation: liked .4s ease;
+}
+@keyframes liked {
+    0% {
+        transform: scale(.8);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/*---- view post ----*/
+.comment-username{
+    padding-left: 0.5rem;
+    font-size: 16px;
+    font-weight: 700;
+}
+.comment-box textarea{
+    margin: 0rem 1rem 0rem 1rem;
+}
+.comment-area .username{
+    font-weight: 500;
+}
+.comment-area .comment-info{
+    width: 90%;
+}
+
+/*------- update post -------*/
+.update-post-wrapper {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 50px;
+    width: 80%;
+    margin: auto;
+}
+.update-post-wrapper form {
+    width: 100%;
+}
+.update-header h5{
+    font-weight: 600;
+    font-size: 40px;
+    color: #3f4682;
+}
+.update-btn{
+    margin-top: 1rem;
+}
+.update-btn button{
+    background-color: #3f4682;
+    border: none;
+}
+.update-btn button:hover{
+    background-color: #3f4682;
+    border: none;
+}
+
+/*------- delete post -------*/
+.delete-post-wrapper {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 50px;
+    width: 80%;
+    margin: auto;
+}
+.delete-post-wrapper form {
+    width: 100%;
+}
+.delete-header h5{
+    font-weight: 600;
+    font-size: 40px;
+    color: #3f4682;
+}
+.delete-header p{
+    font-size: 20px;
+}

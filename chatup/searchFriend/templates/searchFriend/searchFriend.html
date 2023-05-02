@@ -1,0 +1,40 @@
+{% extends 'searchFriend/layout.html' %}
+{% block body %}
+
+<body>
+<br>
+<section>
+    <div class="text-center mt-4">
+    <p class="header">Search Results</p>
+      <div class="container w-50">
+        <div class="form-row text-center" style="display: flex; justify-content: center;">
+          <div class="form-group">  
+            <ul class="form-group profile-box box">
+              <!-- for  -->
+              {% for f in friends %}
+                  <a href= "{% url 'searchFriend:friend' f.user_id.username %}">
+                    <li class="profile-search">
+                      <div class="row pl-3">
+                        <div class="col-2 pt-2">
+                          <img src="{{f.profile_image.url}}" class="profileimg" style="width: 50px; height: 50px;">
+                        </div>
+                        <div class="col-7 pt-2">
+                          <!-- friend usermane -->
+                            <h3 style="color: #3F4682; font-weight: bold;" class="pt-2">ChatUp ID: {{f.chatup_id}}</h3>
+                            <div class="pt-2 f-text"> Phone Number: {{f.phone_number}}</div>
+                          </a>
+                        </div>
+                      </div>
+                    </li>
+                  </a>
+              {% endfor %}
+              <!-- end  -->
+            </ul>
+          </div>  
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'user/layout.html' %}
+{% block body %}
+
+<body class="profile-bg">
+<br>
+<section>
+  <div class="text-center mt-4">
+    <div class="container w-50">
+      <div class="form-row text-center" style="display: flex; justify-content: center;">
+        <div class="form-group">
+            <img src="{{ user_info.profile_image.url }}" class="main-profile">
+            <h3 style="color: #3F4682; font-weight: bold;">{{ request.user.first_name }} {{ request.user.last_name }}</h3>
+            <h5 style="color: #3b3e57;">{{ request.user.username }}</h5>
+          </div>
+      </div>
+
+      <div class="form-row text-center" style="display: flex; justify-content: center;">
+        <div class="form-group">
+          <a href= "{% url 'user:friend_list' %}">
+            <button class="friends" style="background-color: #3F4682;">
+            Friends
+            </button>
+          </a>
+          <a href= "{% url 'user:edit_profile' %}">
+            <button class="edit" style="color: #3F4682;">
+            Edit Profile
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <!-- <div class="form-row text-center" style="display: flex; justify-content: center;">
+        <div class="form-group">  
+          <ul class="form-group profile-box box">
+            
+              <li class="profile-post">
+                <div class="row pl-3">
+                  <img src="{{ user_info.profile_image.url }}" class="profileimg" style="width: 50px; height: 50px;">
+                  <h3 style="color: #3F4682; font-weight: bold;" class="col-7 pt-2">{{ request.user.username }}</h3>
+                  <div class="col-2 ml-auto pt-3 time-post">6h</div>
+                </div>
+                <div class="row pl-3">
+                  <p class="text">
+                    Text.
+                </div>
+                <div class="row pl-3">
+                  <a href= "#">
+                    <button class="delete">
+                    Delete
+                    </button>
+                  </a>
+                  <div class="ml-auto">
+                    <a href="#" class="col-3">
+                      <span id = heart>
+                        <i class="fa-regular fa-heart"></i>
+                      </span>
+                    </a>
+                    <a href= "#" class="col-2">
+                      <button class="comment">
+                      Comment
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            
+          </ul>
+        </div>  
+      </div> -->
+
+    </div>
+  </div>
+</section>
+<br><br><br>
+
+
+
+</body>
+{% endblock %}

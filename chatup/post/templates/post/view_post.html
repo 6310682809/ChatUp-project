@@ -1,0 +1,109 @@
+{% extends 'post/layout.html' %}
+{% load static %}
+{% block body %}
+
+<div class="container">
+  <div class="post-feeds mt-3">
+    <div class="back-btn" style="margin-left: -4rem;">
+      <a href="{% url 'post:post' %}" class="btn btn-light"><i class="fa-solid fa-chevron-left"></i></a>
+    </div>
+    <!-- post -->
+    <div class="post-area mt-0 pt-0">
+      <div class="post-header d-flex">
+        <a href="{% url 'searchFriend:friend' post.created_by.user_id.username %}" class="profile-pic">
+          <img src="{{post.created_by.profile_image.url}}" alt="avatar" class="profile-pic">
+        </a>
+        <a href="{% url 'searchFriend:friend' post.created_by.user_id.username %}" class="header-info" style="color: #3f4682;">
+          <h5 class="username m-0">{{post.created_by.user_id.username}}</h5>
+          <p class="create-date text-muted">{{post.created_at | timesince}} ago</p>
+        </a>
+          {% if request.user == post.created_by.user_id %}
+            <div class="d-flex align-items-center justify-content-center p-1 mx-2"
+              style="width: 38px; height: 38px; object-fit: cover" id="delete-post-menu" data-bs-toggle="dropdown"
+              aria-expanded="false" type="button" data-bs-auto-close="outside">
+              <i class="fa-solid fa-ellipsis"></i>
+            </div>
+            <!-- delete dropdown -->
+            <ul class="dropdown-menu shadow p-3 m-1" aria-labelledby="delete-post-menu">
+              <div class="delete-dropdown">
+                <a href="{% url 'post:delete_post' post.id %}" class="delete-btn text-danger">
+                  Delete
+                </a>
+              </div>
+            </ul>
+            {% endif %}
+      </div>
+      <div class="post-main">
+        <div class="caption">
+          {{post.detail}}
+        </div>
+
+        {% for img in images %}
+        <div class="post-img mt-2">
+          <img src="{{img.file.url}}">
+        </div>
+        {% endfor %}
+      </div>
+      <div class="post-action mt-3">
+        <a href="{% url 'post:like_post' post.id %}">
+          <span id = heart>
+              {% if post.like %}
+                  <i class="fa-solid fa-heart"></i>
+              {% else %}
+                  <i class="fa-regular fa-heart"></i>
+              {% endif %}
+          </span>
+       </a>
+        <p class="m-0">{{post.count_like}} Likes</p>
+        <p>{{post.count_comment}} Comments</p>
+      </div>
+
+      <!------ comment box ------>
+      <form action="{% url 'post:view_post' post.id %}" class="comment-box d-flex mt-4" method="POST">
+        {% csrf_token %}
+        <div class="profile-pic">
+          <img src="{{userInfo.profile_image.url}}" alt="avatar" class="profile-pic" name="images">
+        </div>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="1" name="comment"></textarea>
+        <div class="post-btn">
+          <button type="submit" class="comment-btn">Comment</button>
+        </div>
+      </form>
+      <!---- comments ---->
+      {% for comment in all_comment %}
+        <div class="comment-area">
+          <hr>
+          <div class="comments d-flex">
+            <a href="{% url 'searchFriend:friend' comment.created_by.user_id.username %}" class="profile-pic">
+              <img src="{{comment.created_by.profile_image.url}}" alt="avatar" class="profile-pic">
+            </a>
+            <a href="{% url 'searchFriend:friend' comment.created_by.user_id.username %}" class="header-info" style="color: #3f4682;">
+              <h5 class="username m-0">{{comment.created_by.user_id.username}}</h5>
+              <p class="create-date text-muted">{{comment.created_at | timesince}} ago</p>
+            </a>
+              {% if request.user == comment.created_by.user_id %}
+                <div class="d-flex align-items-center justify-content-center p-1 mx-2"
+                  style="width: 38px; height: 38px; object-fit: cover" id="delete-comment-menu" data-bs-toggle="dropdown"
+                  aria-expanded="false" type="button" data-bs-auto-close="outside">
+                  <i class="fa-solid fa-ellipsis"></i>
+                </div>
+                <!-- delete dropdown -->
+                <ul class="dropdown-menu shadow p-3 m-1" aria-labelledby="delete-comment-menu">
+                  <div class="delete-dropdown">
+                    <a href="{% url 'post:delete_comment' post.id comment.id %}" class="delete-btn text-danger">
+                      Delete
+                    </a>
+                  </div>
+                </ul>
+              {% endif %}
+          </div>
+          <div class="comment-info">
+            <p>{{comment.detail}}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<script src="../../static/post/css/post.js"></script>
+{% endblock %}

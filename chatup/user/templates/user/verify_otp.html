@@ -1,0 +1,43 @@
+{% extends 'user/layout2.html' %}
+{% block body %}
+
+<body class="h-100">
+<nav class="navbar navbar-expand-lg navbar-light bg-white mb-3">
+    <a class="navbar-brand chatup" style="color: #3F4682; font-size:25px;" href="{% url 'user:index' %}">
+        <img src="https://i.imgur.com/d09bZgy.png" width="25px">
+        ChatUp
+    </a>
+    <div class="collapse navbar-collapse  w-100 order-3 dual-collapse2" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="btn mx-3 align-middle" style="background-color: #3F4682; color: white;" href="{% url 'user:signin' %}" role="button">
+                  Sign In
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<section>
+  <div class="text-center mt-4">
+    <p class="header">Verification OTP</p>
+      <p>The OTP has been sent. Please enter the OTP.</p>
+        <div class="container w-50">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group text-left ">
+                    <label for="otp">OTP:</label>
+                    <input type="text" class="form-control d-flex justify-content-center" name="otp" required>
+                    {% if message %}
+                        <div style="color: red">{{ message }}</div>
+                    {% endif %}
+                </div>
+                <button type="submit" class="btn text-light" style="background-color: #3F4682;">Verify OTP</button>
+            </form>
+        </div>
+</section>
+
+
+
+</body>
+{% endblock %}
