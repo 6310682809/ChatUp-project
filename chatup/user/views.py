@@ -144,11 +144,23 @@ def signup(request):
             request.session['chatupid'] = chatupid
             request.session['password'] = password
 
-            client = Client(account_sid, auth_token)
-            verification = client.verify.v2.services(verify_sid) \
-                .verifications \
-                .create(to=prefixPhoneNumber + phonenumber[1:], channel="sms")
-            return redirect('user:verify_otp')
+            # client = Client(account_sid, auth_token)
+            # verification = client.verify.v2.services(verify_sid) \
+            #     .verifications \
+            #     .create(to=prefixPhoneNumber + phonenumber[1:], channel="sms")
+            # return redirect('user:verify_otp')
+            user = User.objects.create_user(
+                request.session['username'], request.session['email'], request.session['password'])
+            user.first_name = request.session['firstname']
+            user.last_name = request.session['lastname']
+            user.save()
+
+            UserInfo.objects.create(user_id=user, prefix_phone_number=request.session['prefixPhoneNumber'], phone_number=request.session[
+                                    'phonenumber'], chatup_id=request.session['chatupid'], profile_image='./static/assets/default_profile_image/default.jpg', 
+                                    last_logout=timezone.now())
+
+            return redirect('user:signin')
+
         else:
             return render(request, 'user/signup.html', {
                 'phmessage': phmessage,
