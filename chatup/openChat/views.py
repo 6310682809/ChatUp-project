@@ -187,7 +187,7 @@ def view_openchat(request, openchat_id):
                 else:
                     message.show_date = None
                 
-            return render(request, 'openChat/openChat_room.html', {
+            return render(request, 'openChat/openchat_room.html', {
                 'user_info': user_info,
                 'openchats': openchats,
                 'openchat': openchat,

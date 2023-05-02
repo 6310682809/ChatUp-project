@@ -12,6 +12,11 @@ from django.core.mail import send_mail
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
+
+account_sid = ""
+auth_token = ""
+verify_sid = ""
+
 def index(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user:signin'))
