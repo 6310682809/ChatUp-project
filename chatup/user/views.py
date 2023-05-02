@@ -12,11 +12,6 @@ from django.core.mail import send_mail
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
-account_sid = "AC3607d951e9f16551ff392e66a5086414"
-auth_token = "4d251cb5cbb2b470be11874ace98e0f5"
-verify_sid = "VAc62028483f915539917bf2ee4e83b839"
-
-
 def index(request):
     if not request.user.is_authenticated:
         return HttpResponseRedirect(reverse('user:signin'))
@@ -130,9 +125,14 @@ def signup(request):
 
         # check password
         if password == '':
-            pmessage = 'Please Enter Password.'
-        if password != confirmpassword:
-            pmessage = 'Confirm Password is not same as password.'
+            pmessage = ['Please Enter Password.']
+        elif password != confirmpassword :
+            pmessage = ['Confirm Password is not same as password.']
+        else:
+            try:
+                validate_password(password)
+            except ValidationError as e:
+                pmessage = '\n'.join(e.messages).split('\n')
 
         if umessage == '' and pmessage == '' and phmessage == '' and idmessage == '':
             request.session['firstname'] = firstname
