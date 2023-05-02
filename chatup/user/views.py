@@ -12,9 +12,9 @@ from django.core.mail import send_mail
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 
-account_sid = ""
-auth_token = ""
-verify_sid = ""
+account_sid = "AC3607d951e9f16551ff392e66a5086414"
+auth_token = "4d251cb5cbb2b470be11874ace98e0f5"
+verify_sid = "VAc62028483f915539917bf2ee4e83b839"
 
 
 def index(request):
